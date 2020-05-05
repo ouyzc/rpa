@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.oyzc.dao.RpaLogDao">
+    <!--目的：为DAO接口方法提供sql语句配置
+    xml中<=号有冲突 需要用<![CDATA[ <= ]]>包括起来
+    -->
+
+    <select id="findAllByPage" resultType="RpaLog" parameterType="java.util.Map">
+        select * from rpalog order by end_time desc
+    </select>
+
+    <select id="findByResultByPage" resultType="RpaLog" parameterType="java.util.Map">
+        select * from rpalog where result=#{result} order by end_time desc
+    </select>
+
+    <select id="findByTimeByPage" resultType="RpaLog" parameterType="java.util.Map">
+        select * from rpalog
+        where start_time > #{startTime} and end_time<![CDATA[ < ]]>#{endTime}
+        order by end_time desc
+    </select>
+
+</mapper>
